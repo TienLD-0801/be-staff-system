@@ -2,7 +2,6 @@ type User {
   fullName: String
   shortName: String
   email: String
-  password: String
   phone: String
   linkedIn: String
   role: Int

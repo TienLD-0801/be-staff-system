@@ -1,8 +1,8 @@
 import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
-import { UserEntity } from 'src/entity/user.entity';
-import { UsersRepository } from '../../repositories/users.repository';
 import * as bcrypt from 'bcrypt';
+import { UsersRepository } from '@/repositories/users.repository';
+import { UserEntity } from '@/entity/user.entity';
 import { CreateUserDto } from './dto/user.dto';
 
 @Injectable()
@@ -43,6 +43,18 @@ export class UsersService {
       role: role,
     };
 
-    return await this.userRepository.save(data);
+    const userSave = await this.userRepository.save(data);
+
+    return {
+      fullName: userSave.fullName,
+      shortName: userSave.shortName,
+      email: userSave.email,
+      phone: userSave.phone,
+      startDate: userSave.startDate.toString(),
+      endDate: userSave.endDate.toString(),
+      linkedIn: userSave.linkedIn,
+      isFrozen: userSave.isFrozen,
+      role: userSave.role,
+    };
   }
 }

@@ -1,12 +1,14 @@
 import { GraphQLFormattedError } from 'graphql';
-import _ from 'lodash';
 
 export const formatError = (error: GraphQLFormattedError): any => {
   const formatError: any = error.extensions.originalError;
+
   if (formatError) {
+    console.log();
+    const isArray = Array.isArray(formatError.message);
     const convertObj = {
       ...formatError,
-      message: _.get(formatError, 'message').join(''),
+      message: isArray ? formatError.message[0] : formatError.message,
     };
     return convertObj;
   }

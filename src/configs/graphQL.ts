@@ -1,5 +1,5 @@
+import { formatError } from '@/shared/error/format-error';
 import { ApolloDriver, ApolloDriverConfig } from '@nestjs/apollo';
-import { formatError } from '../shared/Error/format-error';
 import { GraphQLFormattedError } from 'graphql';
 
 const graphQLConfig: ApolloDriverConfig = {
@@ -10,7 +10,7 @@ const graphQLConfig: ApolloDriverConfig = {
   context: ({ req, res }) => ({ req, res }),
   installSubscriptionHandlers: true,
   csrfPrevention: true,
-  formatError: (error : GraphQLFormattedError) => formatError(error),
+  formatError: (error: GraphQLFormattedError) => formatError(error),
 };
 
 export default graphQLConfig;

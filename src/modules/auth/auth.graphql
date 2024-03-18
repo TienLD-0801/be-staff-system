@@ -1,0 +1,42 @@
+type UserProfile {
+  fullName: String
+  shortName: String
+  email: String
+  phone: String
+  linkedIn: String
+  role: Int
+  startDate: String
+  endDate: String
+  isFrozen: Int
+  skills: [String]
+}
+
+type Auth {
+  token: String,
+  refreshToken: String
+  expired:String
+}
+
+type LoginUser {
+  auth: Auth
+  profile: UserProfile
+}
+
+
+type LoginResponse {
+  statusCode: Int!
+  message: String
+  data: LoginUser
+  error: String
+}
+
+
+input LoginInput {
+  email: String!
+  password: String! 
+}
+
+
+type Mutation {
+  login(input: LoginInput!): LoginResponse
+}

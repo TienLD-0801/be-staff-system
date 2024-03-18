@@ -4,6 +4,7 @@ import { UsersModule } from './modules/users/users.module';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import * as dotenv from 'dotenv';
 import graphQLConfig from './configs/graphQL';
+import { AuthModule } from './modules/auth/auth.module';
 dotenv.config();
 
 @Module({
@@ -23,6 +24,7 @@ dotenv.config();
       logging: false,
     }),
     GraphQLModule.forRoot(graphQLConfig),
+    AuthModule,
     UsersModule,
   ],
 })
