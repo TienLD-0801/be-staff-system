@@ -1,0 +1,51 @@
+type User {
+  fullName: String
+  shortName: String
+  email: String
+  password: String
+  phone: String
+  linkedIn: String
+  role: Int
+  startDate: String
+  endDate: String
+  isFrozen: Int
+  skills: [String]
+  createdAt: String
+  updatedAt: String
+}
+
+type CreateUserResponse {
+  statusCode: Int!
+  message: String
+  data: User
+  error: String
+}
+
+type GetAllUserResponse {
+  statusCode: Int!
+  message: String
+  data: [User]
+  error: String
+}
+
+input CreateUserInput {
+  fullName: String!
+  shortName: String!
+  email: String!
+  password: String!
+  phone: String!
+  linkedIn: String!
+  role: Int!
+  startDate: String!
+  endDate: String!
+  isFrozen: Int!
+  skills: [String]
+}
+
+type Query {
+  getAllUser: GetAllUserResponse
+}
+
+type Mutation {
+  createUser(input: CreateUserInput!): CreateUserResponse
+}
