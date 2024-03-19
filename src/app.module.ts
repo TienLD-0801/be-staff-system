@@ -5,6 +5,7 @@ import { TypeOrmModule } from '@nestjs/typeorm';
 import * as dotenv from 'dotenv';
 import graphQLConfig from './configs/graphQL';
 import { AuthModule } from './modules/auth/auth.module';
+import '@/shared/utils/paginate';
 
 dotenv.config();
 

@@ -21,12 +21,6 @@ type CreateUserResponse {
   error: String
 }
 
-type GetAllUserResponse {
-  statusCode: Int!
-  message: String
-  data: [User]
-  error: String
-}
 
 input CreateUserInput {
   fullName: String!
@@ -38,8 +32,39 @@ input CreateUserInput {
   gender: Int
 }
 
+type GetAllUserResponse {
+  statusCode: Int!
+  message: String
+  data: UsersResponse
+  error: String
+}
+
+
+type UserListResponse {
+  id: String
+  fullName: String
+  shortName: String
+  email: String
+  phone: String
+  linkedIn: String
+  role: Int
+  startDate: String
+  endDate: String
+  gender: Int
+  isFrozen: Boolean
+  skills: [String]
+  createdAt: String
+  updatedAt: String
+}
+
+
+type UsersResponse {
+  userList: [UserListResponse]
+  paging: Paging
+}
+
 type Query {
-  getAllUser: GetAllUserResponse
+  getAllUsers(pager: Pager!, filterConditions: JSON, orderConditions: JSON): GetAllUserResponse
 }
 
 type Mutation {

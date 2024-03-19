@@ -9,5 +9,6 @@ module.exports = {
   rules: {
     'no-extra-boolean-cast': 'warn',
     '@typescript-eslint/no-explicit-any': ['off'],
+    '@typescript-eslint/no-unused-vars': 'off',
   },
 };

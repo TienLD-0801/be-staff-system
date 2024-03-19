@@ -1,0 +1,19 @@
+scalar JSON
+
+input Pager {
+  limit: Int!
+  offset: Int
+  page: Int
+  isTakeAll: Boolean
+}
+
+type Paging {
+  limit: Int!
+  offset: Int!
+  page: Int!
+  totalCount: Int!
+  isNext: Boolean
+  isPrev: Boolean
+  orders: JSON
+  filters: JSON
+}

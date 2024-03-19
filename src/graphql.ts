@@ -23,6 +23,13 @@ export class CreateUserInput {
     gender?: Nullable<number>;
 }
 
+export class Pager {
+    limit: number;
+    offset?: Nullable<number>;
+    page?: Nullable<number>;
+    isTakeAll?: Nullable<boolean>;
+}
+
 export class UserProfile {
     fullName?: Nullable<string>;
     shortName?: Nullable<string>;
@@ -89,12 +96,46 @@ export class CreateUserResponse {
 export class GetAllUserResponse {
     statusCode: number;
     message?: Nullable<string>;
-    data?: Nullable<Nullable<User>[]>;
+    data?: Nullable<UsersResponse>;
     error?: Nullable<string>;
 }
 
-export abstract class IQuery {
-    abstract getAllUser(): Nullable<GetAllUserResponse> | Promise<Nullable<GetAllUserResponse>>;
+export class UserListResponse {
+    id?: Nullable<string>;
+    fullName?: Nullable<string>;
+    shortName?: Nullable<string>;
+    email?: Nullable<string>;
+    phone?: Nullable<string>;
+    linkedIn?: Nullable<string>;
+    role?: Nullable<number>;
+    startDate?: Nullable<string>;
+    endDate?: Nullable<string>;
+    gender?: Nullable<number>;
+    isFrozen?: Nullable<boolean>;
+    skills?: Nullable<Nullable<string>[]>;
+    createdAt?: Nullable<string>;
+    updatedAt?: Nullable<string>;
 }
 
+export class UsersResponse {
+    userList?: Nullable<Nullable<UserListResponse>[]>;
+    paging?: Nullable<Paging>;
+}
+
+export abstract class IQuery {
+    abstract getAllUsers(pager: Pager, filterConditions?: Nullable<JSON>, orderConditions?: Nullable<JSON>): Nullable<GetAllUserResponse> | Promise<Nullable<GetAllUserResponse>>;
+}
+
+export class Paging {
+    limit: number;
+    offset: number;
+    page: number;
+    totalCount: number;
+    isNext?: Nullable<boolean>;
+    isPrev?: Nullable<boolean>;
+    orders?: Nullable<JSON>;
+    filters?: Nullable<JSON>;
+}
+
+export type JSON = any;
 type Nullable<T> = T | null;

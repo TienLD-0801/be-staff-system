@@ -6,6 +6,8 @@ import { UserEntity } from '@/entity/user.entity';
 import { CreateUserDto } from './dto/user.dto';
 import { customResponseError } from '@/shared/error/custom-error';
 import { convertTime } from '@/shared/utils/convertTime';
+import { Pager } from '@/graphql';
+import _ from 'lodash';
 
 @Injectable()
 export class UserService {
@@ -58,5 +60,29 @@ export class UserService {
     } catch (error) {
       customResponseError(error);
     }
+  }
+
+  async getAllUsers(
+    pager: Pager,
+    filterConditions: object = undefined,
+    orderConditions: object = undefined,
+  ) {
+    const queryBuilder = this.userRepository.createQueryBuilder(
+      UserEntity.name,
+    );
+    if (!_.isEmpty(filterConditions)) {
+      // add filters condition here
+    }
+    if (!_.isEmpty(orderConditions)) {
+      // add orders condition here
+    }
+    // pass final queryBuilder here to paging
+    const [userList, paging] = await queryBuilder.paginate(
+      pager,
+      filterConditions,
+      orderConditions,
+    );
+    // parse result as paging result
+    return { userList, paging };
   }
 }
