@@ -1,10 +1,11 @@
-import { Module } from '@nestjs/common';
+import { Logger, Module, OnModuleInit } from '@nestjs/common';
 import { GraphQLModule } from '@nestjs/graphql';
-import { UsersModule } from './modules/users/users.module';
+import { UserModule } from './modules/user/user.module';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import * as dotenv from 'dotenv';
 import graphQLConfig from './configs/graphQL';
 import { AuthModule } from './modules/auth/auth.module';
+
 dotenv.config();
 
 @Module({
@@ -25,7 +26,14 @@ dotenv.config();
     }),
     GraphQLModule.forRoot(graphQLConfig),
     AuthModule,
-    UsersModule,
+    UserModule,
   ],
 })
-export class AppModule {}
+export class AppModule implements OnModuleInit {
+  async onModuleInit() {
+    await this.init();
+  }
+  async init() {
+    new Logger().log(`${AppModule.name} init`);
+  }
+}

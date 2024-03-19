@@ -19,12 +19,8 @@ export class CreateUserInput {
     email: string;
     password: string;
     phone: string;
-    linkedIn: string;
     role: number;
-    startDate: string;
-    endDate: string;
-    isFrozen: number;
-    skills?: Nullable<Nullable<string>[]>;
+    gender?: Nullable<number>;
 }
 
 export class UserProfile {
@@ -34,10 +30,13 @@ export class UserProfile {
     phone?: Nullable<string>;
     linkedIn?: Nullable<string>;
     role?: Nullable<number>;
+    gender?: Nullable<number>;
     startDate?: Nullable<string>;
     endDate?: Nullable<string>;
-    isFrozen?: Nullable<number>;
+    isFrozen?: Nullable<boolean>;
     skills?: Nullable<Nullable<string>[]>;
+    createdAt?: Nullable<string>;
+    updatedAt?: Nullable<string>;
 }
 
 export class Auth {
@@ -73,7 +72,8 @@ export class User {
     role?: Nullable<number>;
     startDate?: Nullable<string>;
     endDate?: Nullable<string>;
-    isFrozen?: Nullable<number>;
+    gender?: Nullable<number>;
+    isFrozen?: Nullable<boolean>;
     skills?: Nullable<Nullable<string>[]>;
     createdAt?: Nullable<string>;
     updatedAt?: Nullable<string>;

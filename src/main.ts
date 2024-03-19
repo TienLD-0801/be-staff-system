@@ -1,8 +1,9 @@
 import { NestFactory } from '@nestjs/core';
 import { NestExpressApplication } from '@nestjs/platform-express';
 import { AppModule } from './app.module';
-import { Logger, ValidationPipe } from '@nestjs/common';
+import { Logger } from '@nestjs/common';
 import { initializeTransactionalContext } from 'typeorm-transactional';
+import { ValidationPipe } from './shared/pipe/validation.pipe';
 
 async function bootstrap() {
   initializeTransactionalContext();
@@ -18,9 +19,8 @@ async function bootstrap() {
     optionsSuccessStatus: 204,
   });
 
-  app.useGlobalPipes(
-    new ValidationPipe({ always: true, stopAtFirstError: true }),
-  );
+  app.useGlobalPipes(new ValidationPipe());
+
   const port = parseInt(process.env.APP_PORT, 10) || 3000;
   await app.listen(port, '0.0.0.0', () => {
     new Logger().log(`Service started successfully at port: ${port}`);

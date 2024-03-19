@@ -7,7 +7,7 @@ const graphQLConfig: ApolloDriverConfig = {
   typePaths: ['./**/*.graphql'],
   path: '/graphql',
   playground: false,
-  context: ({ req, res }) => ({ req, res }),
+  context: ({ req }) => ({ headers: req.headers }),
   installSubscriptionHandlers: true,
   csrfPrevention: true,
   formatError: (error: GraphQLFormattedError) => formatError(error),

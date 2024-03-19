@@ -30,20 +30,20 @@ export class UserEntity extends BaseEntity {
   @Column()
   phone: string;
 
-  @Column()
-  linkedIn: string;
+  @Column({ default: null })
+  linkedIn?: string;
 
   @Column()
   role: number;
 
-  @Column()
-  startDate: string;
-
-  @Column()
+  @Column({ default: null })
   endDate: string;
 
-  @Column()
-  isFrozen: number;
+  @Column({default: false})
+  isFrozen: boolean;
+
+  @Column({default : 2})
+  gender: number;
 
   @CreateDateColumn()
   createdAt: Date;

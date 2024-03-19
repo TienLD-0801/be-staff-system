@@ -5,10 +5,13 @@ type UserProfile {
   phone: String
   linkedIn: String
   role: Int
+  gender:Int
   startDate: String
   endDate: String
-  isFrozen: Int
+  isFrozen: Boolean
   skills: [String]
+  createdAt: String
+  updatedAt: String
 }
 
 type Auth {

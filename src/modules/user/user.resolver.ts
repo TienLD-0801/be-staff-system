@@ -1,11 +1,14 @@
 import { Args, Mutation, Query, Resolver } from '@nestjs/graphql';
-import { UsersService } from './users.service';
+import { UserService } from './user.service';
 import { BaseResolver } from 'src/shared/base/base.resolver';
 import { CreateUserDto } from './dto/user.dto';
+import { UseGuards } from '@nestjs/common';
+import { JwtAuthGuard } from '@/shared/guards/auth.guard';
 
 @Resolver()
-export class UsersResolver extends BaseResolver {
-  constructor(private usersService: UsersService) {
+@UseGuards(JwtAuthGuard)
+export class UserResolver extends BaseResolver {
+  constructor(private usersService: UserService) {
     super();
   }
 

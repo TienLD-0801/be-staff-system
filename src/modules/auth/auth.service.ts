@@ -3,15 +3,16 @@ import { InjectRepository } from '@nestjs/typeorm';
 import * as bcrypt from 'bcrypt';
 import { JwtService } from '@nestjs/jwt';
 import { UserEntity } from '@/entity/user.entity';
-import { UsersRepository } from '@/repositories/users.repository';
+import { UserRepository } from '@/repositories/users.repository';
 import { LoginUser } from '@/graphql';
 import { AuthLoginDto } from './dto/auth.dto';
+import { convertTime } from '@/shared/utils/convertTime';
 
 @Injectable()
 export class AuthService {
   constructor(
     @InjectRepository(UserEntity)
-    private readonly userRepository: UsersRepository,
+    private readonly userRepository: UserRepository,
     private jwtService: JwtService,
   ) {}
 
@@ -27,18 +28,18 @@ export class AuthService {
       throw new BadRequestException('Invalid password');
     }
 
-    const jwt = await this.jwtService.signAsync(
-      { id: user.id },
+    const jwt = this.jwtService.sign(
+      { id: user.id, email: user.email },
       {
-        secret: 'secret',
+        secret: process.env.JWT_ACCESS_KEY,
         expiresIn: '1d',
       },
     );
 
     const refreshJwt = await this.jwtService.signAsync(
-      { id: user.id },
+      { id: user.id, email: user.email },
       {
-        secret: 'secret',
+        secret: process.env.JWT_ACCESS_KEY,
         expiresIn: '7d',
       },
     );
@@ -60,10 +61,13 @@ export class AuthService {
         email: user.email,
         phone: user.phone,
         linkedIn: user.linkedIn,
-        role: user.role,
-        startDate: user.startDate,
-        endDate: user.endDate,
+        gender: user.gender,
         isFrozen: user.isFrozen,
+        role: user.role,
+        startDate: convertTime(user.createdAt),
+        endDate: null,
+        createdAt : user.createdAt.toString(),
+        updatedAt : user.updatedAt.toString()
       },
     };
   }
