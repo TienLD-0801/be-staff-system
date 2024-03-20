@@ -2,7 +2,6 @@ import { IsEmail, IsNotEmpty, IsString } from 'class-validator';
 import { Field, ArgsType } from '@nestjs/graphql';
 import { LoginInput } from '@/graphql';
 
-
 @ArgsType()
 export class AuthLoginDto extends LoginInput {
   @Field()

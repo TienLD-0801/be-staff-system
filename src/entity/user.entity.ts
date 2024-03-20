@@ -39,10 +39,10 @@ export class UserEntity extends BaseEntity {
   @Column({ default: null })
   endDate: string;
 
-  @Column({default: false})
+  @Column({ default: false })
   isFrozen: boolean;
 
-  @Column({default : 2})
+  @Column({ default: 2 })
   gender: number;
 
   @CreateDateColumn()

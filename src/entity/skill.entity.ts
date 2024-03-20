@@ -7,8 +7,6 @@ import {
   UpdateDateColumn,
 } from 'typeorm';
 
-
-
 @Entity('skill')
 export class SkillEntity extends BaseEntity {
   @PrimaryGeneratedColumn()

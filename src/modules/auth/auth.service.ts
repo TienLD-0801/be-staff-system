@@ -66,8 +66,8 @@ export class AuthService {
         role: user.role,
         startDate: convertTime(user.createdAt),
         endDate: null,
-        createdAt : user.createdAt.toString(),
-        updatedAt : user.updatedAt.toString()
+        createdAt: user.createdAt.toString(),
+        updatedAt: user.updatedAt.toString(),
       },
     };
   }
