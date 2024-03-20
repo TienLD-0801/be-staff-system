@@ -19,7 +19,9 @@
     "test:debug": "node --inspect-brk -r tsconfig-paths/register -r ts-node/register node_modules/.bin/jest --runInBand",
     "test:e2e": "jest --config ./test/jest-e2e.json",
     "generate-typing": "ts-node generate-typings",
-    "docker-up": "docker-compose -f docker-compose.yml up --build -d"
+    "docker-up": "docker-compose -f docker-compose.yml up --build -d",
+    "typeorm": "ts-node ./node_modules/typeorm/cli",
+    "migrations:run": "yarn run typeorm migration:run -- -d ./typeOrm.config.ts"
   },
   "dependencies": {
     "@apollo/server": "^4.10.1",

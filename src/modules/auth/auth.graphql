@@ -15,7 +15,7 @@ type UserProfile {
 }
 
 type Auth {
-  token: String,
+  accessToken: String,
   refreshToken: String
   expired:String
 }

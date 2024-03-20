@@ -6,24 +6,24 @@ import * as dotenv from 'dotenv';
 import graphQLConfig from './configs/graphQL';
 import { AuthModule } from './modules/auth/auth.module';
 import '@/shared/utils/paginate';
+import { DataSource } from 'typeorm';
+import { addTransactionalDataSource } from 'typeorm-transactional';
+import dbConfig from './configs/db/mysql';
 
 dotenv.config();
 
 @Module({
   imports: [
-    TypeOrmModule.forRoot({
-      type: 'mysql',
-      host: 'localhost',
-      port: Number(process.env.DB_HOST),
-      username: process.env.DB_USER,
-      password: process.env.DB_PASSWORD,
-      database: process.env.DB_DATABASE,
-      logger: 'debug',
-      charset: 'utf8mb4',
-      entities: [__dirname + '/**/**.entity{.ts,.js}'],
-      synchronize: true,
-      autoLoadEntities: true,
-      logging: false,
+    TypeOrmModule.forRootAsync({
+      useFactory() {
+        return dbConfig;
+      },
+      async dataSourceFactory(options) {
+        if (!options) {
+          throw new Error('Invalid dataSource options passed');
+        }
+        return addTransactionalDataSource(new DataSource(options));
+      },
     }),
     GraphQLModule.forRoot(graphQLConfig),
     AuthModule,

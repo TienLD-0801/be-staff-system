@@ -51,7 +51,7 @@ export class AuthService {
 
     return {
       auth: {
-        token: jwt,
+        accessToken: jwt,
         refreshToken: refreshJwt,
         expired: new Date(today).toUTCString(),
       },

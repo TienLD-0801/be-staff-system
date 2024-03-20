@@ -47,7 +47,7 @@ export class UserProfile {
 }
 
 export class Auth {
-    token?: Nullable<string>;
+    accessToken?: Nullable<string>;
     refreshToken?: Nullable<string>;
     expired?: Nullable<string>;
 }
