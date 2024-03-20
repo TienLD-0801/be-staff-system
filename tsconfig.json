@@ -17,6 +17,6 @@
     "resolveJsonModule": true,
     "paths": { "@/*": ["src/*"]}
   },
-  "include": ["src/**/*", "src/**/**/*.json"],
+  "include": ["src/**/*", "src/**/**/*.json", "src/**/**/*.ts"],
   "exclude": ["node_modules/**/*"]
 }
