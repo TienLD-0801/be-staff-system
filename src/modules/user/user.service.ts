@@ -6,7 +6,7 @@ import { UserEntity } from '@/entity/user.entity';
 import { CreateUserDto } from './dto/user.dto';
 import { customResponseError } from '@/shared/error/custom-error';
 import { convertTime } from '@/shared/utils/convertTime';
-import { Pager } from '@/gaphql';
+import { Pager } from '@/graphql';
 import _ from 'lodash';
 
 @Injectable()
