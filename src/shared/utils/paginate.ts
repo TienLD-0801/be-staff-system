@@ -1,9 +1,6 @@
 import 'source-map-support/register';
 import _ from 'lodash';
 import { SelectQueryBuilder } from 'typeorm';
-import { AbstractDto } from '../base/abstract.dto';
-import { PageDto, PagerDto, PagingDto } from '../dto/paginate.dto';
-import { AbstractEntity } from '../base/abstract.entity';
 
 declare global {
   interface Array<T> {
@@ -64,7 +61,7 @@ SelectQueryBuilder.prototype.paginate = async function (
   pager.page = page;
   this.skip(offset).take(limit);
   const itemCount = await this.getCount();
-  const { entities, raw } = await this.getRawAndEntities();
+  const { entities } = await this.getRawAndEntities();
   const paging = new PagingDto(itemCount, pager, filters, orders);
   return [entities, paging];
 };

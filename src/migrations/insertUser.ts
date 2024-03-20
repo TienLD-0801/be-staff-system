@@ -16,7 +16,7 @@ export class insertUser080100_1647629357376 implements MigrationInterface {
    `,
     );
   }
-  down(queryRunner: QueryRunner): Promise<any> {
+  down(_queryRunner: QueryRunner): Promise<any> {
     throw new Error('Method not implemented.');
   }
 }
