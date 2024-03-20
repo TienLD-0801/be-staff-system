@@ -85,4 +85,16 @@ export class UserService {
     // parse result as paging result
     return { userList, paging };
   }
+
+  async getUserById(id: string) {
+    if (!id.length || id === '0') {
+      throw new BadRequestException('ID is not empty !');
+    }
+
+    const userById = await this.userRepository.findOne({
+      where: { id: id },
+    });
+
+    return userById;
+  }
 }

@@ -6,7 +6,6 @@ export class PagerDto {
   @IsNotEmpty({ message: 'limit is required.' })
   limit: number;
 
-  @IsOptional()
   @Min(0, { message: 'offset must be greater than equal to 0.' })
   @IsInt({ message: 'offset must be an integer number.' })
   @IsOptional()

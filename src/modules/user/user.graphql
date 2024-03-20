@@ -63,8 +63,35 @@ type UsersResponse {
   paging: Paging
 }
 
+
+type UserById {
+  id: String
+  fullName: String
+  shortName: String
+  email: String
+  phone: String
+  linkedIn: String
+  role: Int
+  startDate: String
+  endDate: String
+  gender: Int
+  isFrozen: Boolean
+  skills: [String]
+  createdAt: String
+  updatedAt: String
+}
+
+
+type GetUserByIdResponse {
+  statusCode: Int!
+  message: String
+  data: UserById
+  error: String
+}
+
 type Query {
   getAllUsers(pager: Pager!, filterConditions: JSON, orderConditions: JSON): GetAllUserResponse
+  getUserById(id: String!): GetUserByIdResponse
 }
 
 type Mutation {

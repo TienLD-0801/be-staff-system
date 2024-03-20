@@ -122,8 +122,34 @@ export class UsersResponse {
     paging?: Nullable<Paging>;
 }
 
+export class UserById {
+    id?: Nullable<string>;
+    fullName?: Nullable<string>;
+    shortName?: Nullable<string>;
+    email?: Nullable<string>;
+    phone?: Nullable<string>;
+    linkedIn?: Nullable<string>;
+    role?: Nullable<number>;
+    startDate?: Nullable<string>;
+    endDate?: Nullable<string>;
+    gender?: Nullable<number>;
+    isFrozen?: Nullable<boolean>;
+    skills?: Nullable<Nullable<string>[]>;
+    createdAt?: Nullable<string>;
+    updatedAt?: Nullable<string>;
+}
+
+export class GetUserByIdResponse {
+    statusCode: number;
+    message?: Nullable<string>;
+    data?: Nullable<UserById>;
+    error?: Nullable<string>;
+}
+
 export abstract class IQuery {
     abstract getAllUsers(pager: Pager, filterConditions?: Nullable<JSON>, orderConditions?: Nullable<JSON>): Nullable<GetAllUserResponse> | Promise<Nullable<GetAllUserResponse>>;
+
+    abstract getUserById(id: string): Nullable<GetUserByIdResponse> | Promise<Nullable<GetUserByIdResponse>>;
 }
 
 export class Paging {

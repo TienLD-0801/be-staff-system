@@ -4,7 +4,7 @@ import { BaseResolver } from 'src/shared/base/base.resolver';
 import { CreateUserDto } from './dto/user.dto';
 import { UseGuards } from '@nestjs/common';
 import { JwtAuthGuard } from '@/shared/guards/auth.guard';
-import { Pager, Paging } from '@/graphql';
+import { Pager } from '@/graphql';
 
 @Resolver()
 export class UserResolver extends BaseResolver {
@@ -15,6 +15,12 @@ export class UserResolver extends BaseResolver {
   @Query('getAllUsers')
   async getAllUsers(@Args('pager') pager: Pager) {
     const data = await this.usersService.getAllUsers(pager);
+    return this.response(data);
+  }
+
+  @Query('getUserById')
+  async getUserById(@Args('id') id: string) {
+    const data = await this.usersService.getUserById(id);
     return this.response(data);
   }
 
