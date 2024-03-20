@@ -1,6 +1,9 @@
 import 'source-map-support/register';
 import _ from 'lodash';
 import { SelectQueryBuilder } from 'typeorm';
+import { AbstractDto } from '../base/abstract.dto';
+import { PageDto, PagerDto, PagingDto } from '../dto/paginate.dto';
+import { AbstractEntity } from '../base/abstract.entity';
 
 declare global {
   interface Array<T> {
