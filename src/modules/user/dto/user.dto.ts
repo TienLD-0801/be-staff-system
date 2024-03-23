@@ -7,7 +7,7 @@ import {
   MinLength,
 } from 'class-validator';
 import { Field, ArgsType } from '@nestjs/graphql';
-import { CreateUserInput } from '@/graphql';
+import { CreateUserInput, UpdateUserInput } from '@/graphql';
 
 @ArgsType()
 export class CreateUserDto extends CreateUserInput {
@@ -45,4 +45,47 @@ export class CreateUserDto extends CreateUserInput {
   @IsOptional()
   @IsNotEmpty({ message: 'Gender is not empty !' })
   gender?: number;
+}
+
+@ArgsType()
+export class UpdateUserDto extends UpdateUserInput {
+  @Field()
+  @IsString()
+  @IsNotEmpty({ message: 'Full Name is not empty !' })
+  @MaxLength(20, { message: 'The length max of full name invalid !' })
+  @IsOptional()
+  fullName?: string;
+
+  @Field()
+  @IsString()
+  @IsNotEmpty({ message: 'Short Name is not empty !' })
+  @MaxLength(12, { message: 'The length max of short name invalid !' })
+  @IsOptional()
+  shortName?: string;
+
+  @Field()
+  @IsEmail()
+  @IsNotEmpty({ message: 'Email is not empty !' })
+  @IsOptional()
+  email?: string;
+
+  @Field()
+  @IsOptional()
+  phone?: string;
+
+  @Field()
+  @IsOptional()
+  linkedIn?: string;
+
+  @Field()
+  @IsOptional()
+  role?: number;
+
+  @Field()
+  @IsOptional()
+  gender?: number;
+
+  @Field()
+  @IsOptional()
+  skills?: string[];
 }

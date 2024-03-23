@@ -1,14 +1,15 @@
 import {
   BaseEntity,
   CreateDateColumn,
-  PrimaryGeneratedColumn,
+  Generated,
+  PrimaryColumn,
   UpdateDateColumn,
 } from 'typeorm';
 import { AbstractDto } from './abstract.dto';
 import { Constructor } from './type';
 
 export interface IAbstractEntity<DTO extends AbstractDto, O = never> {
-  id: number;
+  id: string;
   createdAt: Date;
   updatedAt: Date;
 
@@ -24,14 +25,9 @@ export abstract class AbstractEntity<
 {
   private dtoClass: Constructor<DTO, [AbstractEntity, O?]>;
 
-  @PrimaryGeneratedColumn()
-  id: number;
-
-  @CreateDateColumn({ type: 'datetime' })
-  createdAt: Date;
-
-  @UpdateDateColumn({ type: 'datetime' })
-  updatedAt: Date;
+  @PrimaryColumn('uuid', { name: 'id', default: () => '(uuid())' })
+  @Generated('uuid')
+  id: string;
 
   toDto(options?: O): DTO {
     const dtoClass = this.dtoClass;
@@ -44,6 +40,12 @@ export abstract class AbstractEntity<
 
     return new this.dtoClass(this, options);
   }
+
+  @CreateDateColumn({ type: 'datetime' })
+  createdAt: Date;
+
+  @UpdateDateColumn({ type: 'datetime' })
+  updatedAt: Date;
 
   constructor(partial?: Partial<DTO>) {
     super();

@@ -32,6 +32,28 @@ input CreateUserInput {
   gender: Int
 }
 
+
+input UpdateUserInput {
+  fullName: String
+  shortName: String
+  email: String
+  phone: String
+  linkedIn: String
+  role: Int
+  gender: Int
+  isFrozen: Boolean
+  skills: [String]
+}
+
+
+type UpdateUserResponse {
+  statusCode: Int!
+  message: String
+  data: User
+  error: String
+}
+
+
 type GetAllUserResponse {
   statusCode: Int!
   message: String
@@ -95,5 +117,6 @@ type Query {
 }
 
 type Mutation {
+  updateUser(id: String!, input: UpdateUserInput!): UpdateUserResponse
   createUser(input: CreateUserInput!): CreateUserResponse
 }

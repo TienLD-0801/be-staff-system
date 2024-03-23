@@ -1,20 +1,9 @@
-import {
-  BaseEntity,
-  Column,
-  CreateDateColumn,
-  Entity,
-  JoinTable,
-  ManyToMany,
-  PrimaryGeneratedColumn,
-  UpdateDateColumn,
-} from 'typeorm';
+import { Column, Entity, JoinTable, ManyToMany } from 'typeorm';
 import { SkillEntity } from './skill.entity';
+import { AbstractEntity } from '@/shared/base/abstract.entity';
 
 @Entity('user')
-export class UserEntity extends BaseEntity {
-  @PrimaryGeneratedColumn()
-  id: string;
-
+export class UserEntity extends AbstractEntity {
   @Column()
   fullName: string;
 
@@ -44,12 +33,6 @@ export class UserEntity extends BaseEntity {
 
   @Column({ default: 2 })
   gender: number;
-
-  @CreateDateColumn()
-  createdAt: Date;
-
-  @UpdateDateColumn()
-  updatedAt: Date;
 
   @ManyToMany(() => SkillEntity)
   @JoinTable()

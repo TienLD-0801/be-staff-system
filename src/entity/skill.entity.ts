@@ -1,23 +1,8 @@
-import {
-  BaseEntity,
-  Column,
-  CreateDateColumn,
-  Entity,
-  PrimaryGeneratedColumn,
-  UpdateDateColumn,
-} from 'typeorm';
+import { AbstractEntity } from '@/shared/base/abstract.entity';
+import { Column, Entity } from 'typeorm';
 
 @Entity('skill')
-export class SkillEntity extends BaseEntity {
-  @PrimaryGeneratedColumn()
-  id: string;
-
+export class SkillEntity extends AbstractEntity {
   @Column()
   name: string;
-
-  @CreateDateColumn()
-  createdAt: Date;
-
-  @UpdateDateColumn()
-  updatedAt: Date;
 }

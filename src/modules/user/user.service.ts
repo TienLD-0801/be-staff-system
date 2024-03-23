@@ -3,11 +3,12 @@ import { InjectRepository } from '@nestjs/typeorm';
 import * as bcrypt from 'bcrypt';
 import { UserRepository } from '@/repositories/users.repository';
 import { UserEntity } from '@/entity/user.entity';
-import { CreateUserDto } from './dto/user.dto';
+import { CreateUserDto, UpdateUserDto } from './dto/user.dto';
 import { customResponseError } from '@/shared/error/custom-error';
 import { convertTime } from '@/shared/utils/convertTime';
 import { Pager } from '@/graphql';
 import _ from 'lodash';
+import { SkillEntity } from '@/entity/skill.entity';
 
 @Injectable()
 export class UserService {
@@ -96,5 +97,39 @@ export class UserService {
     });
 
     return userById;
+  }
+
+  async updateUser(id: string, input: UpdateUserDto) {
+    if (!id.length || id === '0') {
+      throw new BadRequestException('ID is not empty !');
+    }
+
+    const user = await this.userRepository.findOneBy({ id: id });
+
+    if (!user) {
+      throw new BadRequestException(`Can't find user with id : ${id}`);
+    }
+
+    await this.userRepository.save({
+      ...user,
+      ...input,
+      skills: input.skills as unknown as SkillEntity[],
+    });
+
+  
+
+    const newUpdateUser = {
+      fullName: input.fullName,
+      shortName: input.shortName,
+      email: input.email,
+      linkedIn: input.linkedIn,
+      phone: input.phone,
+      isFrozen: input.isFrozen,
+      role: input.role,
+      gender: input.gender,
+      skills: input.skills,
+    };
+
+    return newUpdateUser;
   }
 }
