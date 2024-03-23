@@ -116,8 +116,6 @@ export class UserService {
       skills: input.skills as unknown as SkillEntity[],
     });
 
-  
-
     const newUpdateUser = {
       fullName: input.fullName,
       shortName: input.shortName,
